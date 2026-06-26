@@ -1,0 +1,60 @@
+{
+  "last_node_id": 8,
+  "last_link_id": 10,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "CheckpointLoaderSimple",
+      "pos": [10, 10],
+      "properties": { "Node name for S&R": "CheckpointLoaderSimple" },
+      "widgets_values": ["stable_audio_open_1.0.safetensors"]
+    },
+    {
+      "id": 2,
+      "type": "CLIPTextEncode",
+      "pos": [350, 10],
+      "properties": { "Node name for S&R": "CLIPTextEncode" },
+      "widgets_values": ["lo-fi hip hop, jazz piano, mellow, 85 BPM, high quality audio"]
+    },
+    {
+      "id": 3,
+      "type": "EmptyLatentAudio",
+      "pos": [350, 200],
+      "properties": { "Node name for S&R": "EmptyLatentAudio" },
+      "widgets_values": [47, 44100, 1]
+    },
+    {
+      "id": 4,
+      "type": "KSampler",
+      "pos": [700, 10],
+      "properties": { "Node name for S&R": "KSampler" },
+      "widgets_values": [987654321, "randomize", 100, 7, "dpmpp_3m_sde", "exponential", 1]
+    },
+    {
+      "id": 5,
+      "type": "VAEDecode",
+      "pos": [1050, 10],
+      "properties": { "Node name for S&R": "VAEDecode" },
+      "widgets_values": []
+    },
+    {
+      "id": 6,
+      "type": "SaveAudio",
+      "pos": [1350, 10],
+      "properties": { "Node name for S&R": "SaveAudio" },
+      "widgets_values": ["StableAudio_ComfyLab", "flac"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 4, 0, "MODEL"],
+    [2, 2, 0, 4, 1, "CONDITIONING"],
+    [3, 3, 0, 4, 3, "LATENT"],
+    [4, 4, 0, 5, 0, "LATENT"],
+    [5, 5, 0, 6, 0, "AUDIO"],
+    [6, 1, 2, 5, 1, "VAE"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": { "ds": { "scale": 1, "offset": [0, 0] } },
+  "version": 0.4
+}

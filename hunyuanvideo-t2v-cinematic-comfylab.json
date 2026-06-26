@@ -1,0 +1,167 @@
+{
+  "last_node_id": 10,
+  "last_link_id": 10,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "HunyuanVideoModelLoader",
+      "pos": [50, 80],
+      "size": [360, 100],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [{ "name": "MODEL", "type": "MODEL", "links": [1], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "HunyuanVideoModelLoader" },
+      "widgets_values": ["hunyuan_video_t2v_bf16.safetensors", "bf16", "auto"]
+    },
+    {
+      "id": 2,
+      "type": "HunyuanTextEncode",
+      "pos": [480, 70],
+      "size": [560, 220],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [{ "name": "CONDITIONING", "type": "CONDITIONING", "links": [2], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "HunyuanTextEncode" },
+      "widgets_values": [
+        "a cinematic wide shot of a lone astronaut walking through a red desert at sunrise, dust particles in the air, slow tracking camera, realistic lighting, high detail, dramatic atmosphere, smooth motion"
+      ]
+    },
+    {
+      "id": 3,
+      "type": "HunyuanTextEncode",
+      "pos": [480, 340],
+      "size": [560, 170],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [{ "name": "CONDITIONING", "type": "CONDITIONING", "links": [3], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "HunyuanTextEncode" },
+      "widgets_values": ["low quality, blurry, flicker, distorted body, bad anatomy, warped background, text, subtitles, watermark, jump cuts, fast camera shake"]
+    },
+    {
+      "id": 4,
+      "type": "EmptyHunyuanVideoLatent",
+      "pos": [50, 250],
+      "size": [360, 130],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [{ "name": "LATENT", "type": "LATENT", "links": [4], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "EmptyHunyuanVideoLatent" },
+      "widgets_values": [832, 480, 49, 1]
+    },
+    {
+      "id": 5,
+      "type": "HunyuanVideoSampler",
+      "pos": [1110, 120],
+      "size": [360, 290],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        { "name": "model", "type": "MODEL", "link": 1 },
+        { "name": "positive", "type": "CONDITIONING", "link": 2 },
+        { "name": "negative", "type": "CONDITIONING", "link": 3 },
+        { "name": "latent_image", "type": "LATENT", "link": 4 }
+      ],
+      "outputs": [{ "name": "LATENT", "type": "LATENT", "links": [5], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "HunyuanVideoSampler" },
+      "widgets_values": [1122334455, "fixed", 32, 6.0, "dpmpp_2m", "normal", 1.0]
+    },
+    {
+      "id": 6,
+      "type": "HunyuanVideoDecode",
+      "pos": [1530, 120],
+      "size": [260, 60],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [{ "name": "samples", "type": "LATENT", "link": 5 }],
+      "outputs": [{ "name": "IMAGE", "type": "IMAGE", "links": [6], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "HunyuanVideoDecode" }
+    },
+    {
+      "id": 7,
+      "type": "VHS_VideoCombine",
+      "pos": [1860, 100],
+      "size": [420, 360],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [{ "name": "images", "type": "IMAGE", "link": 6 }],
+      "outputs": [{ "name": "Filenames", "type": "VHS_FILENAMES", "links": null, "slot_index": 0 }],
+      "properties": { "Node name for S&R": "VHS_VideoCombine" },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "comfylab_hunyuanvideo",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 20,
+        "save_output": true
+      }
+    },
+    {
+      "id": 8,
+      "type": "Note",
+      "pos": [50, 450],
+      "size": [360, 170],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": { "text": "Preset honesto: 832x480, 49 frames, 32 steps. Para pruebas rapidas usa 512x320, 25 frames, 20 steps." },
+      "widgets_values": ["Preset honesto: 832x480, 49 frames, 32 steps. Para pruebas rapidas usa 512x320, 25 frames, 20 steps."]
+    },
+    {
+      "id": 9,
+      "type": "Note",
+      "pos": [480, 560],
+      "size": [560, 150],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": { "text": "Usa prompts simples: un sujeto, una accion, una camara. Demasiados eventos causan cambios bruscos y flicker." },
+      "widgets_values": ["Usa prompts simples: un sujeto, una accion, una camara. Demasiados eventos causan cambios bruscos y flicker."]
+    },
+    {
+      "id": 10,
+      "type": "Note",
+      "pos": [1110, 470],
+      "size": [360, 160],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": { "text": "Si tu wrapper usa nombres distintos, conserva estructura: model loader -> text encode +/- -> empty video latent -> sampler -> decode -> VHS_VideoCombine." },
+      "widgets_values": ["Si tu wrapper usa nombres distintos, conserva estructura: model loader -> text encode +/- -> empty video latent -> sampler -> decode -> VHS_VideoCombine."]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 5, 0, "MODEL"],
+    [2, 2, 0, 5, 1, "CONDITIONING"],
+    [3, 3, 0, 5, 2, "CONDITIONING"],
+    [4, 4, 0, 5, 3, "LATENT"],
+    [5, 5, 0, 6, 0, "LATENT"],
+    [6, 6, 0, 7, 0, "IMAGE"]
+  ],
+  "groups": [
+    { "title": "Modelo y latent video", "bounding": [30, 40, 400, 600], "color": "#3f789e", "font_size": 24 },
+    { "title": "Prompts T2V", "bounding": [450, 40, 620, 700], "color": "#8a6f2a", "font_size": 24 },
+    { "title": "Sampling", "bounding": [1090, 70, 410, 580], "color": "#2f8f5b", "font_size": 24 },
+    { "title": "Decode y export", "bounding": [1510, 70, 800, 420], "color": "#7a4f9e", "font_size": 24 }
+  ],
+  "config": {},
+  "extra": { "ds": { "scale": 0.66, "offset": [20, 40] } },
+  "version": 0.4
+}

@@ -1,0 +1,65 @@
+{
+  "last_node_id": 10,
+  "nodes": [
+    {
+      "id": 1, "type": "CheckpointLoaderSimple", "pos": [50, 100],
+      "outputs": [{"name": "MODEL", "type": "MODEL", "links": [1], "slot_index": 0}, {"name": "CLIP", "type": "CLIP", "links": [2], "slot_index": 1}, {"name": "VAE", "type": "VAE", "links": [7], "slot_index": 2}],
+      "widgets_values": ["juggernautXL_ragnarokBy.safetensors"]
+    },
+    {
+      "id": 2, "type": "LoraLoader", "pos": [450, 100],
+      "inputs": [{"name": "model", "type": "MODEL", "link": 1}, {"name": "clip", "type": "CLIP", "link": 2}],
+      "outputs": [{"name": "MODEL", "type": "MODEL", "links": [3], "slot_index": 0}, {"name": "CLIP", "type": "CLIP", "links": [4, 5], "slot_index": 1}],
+      "widgets_values": ["tu_lora_favorito.safetensors", 0.8, 0.8]
+    },
+    {
+      "id": 3, "type": "LoadImage", "pos": [50, 400],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [6], "slot_index": 0}],
+      "widgets_values": ["boceto_inicial.jpg", "image"]
+    },
+    {
+      "id": 4, "type": "VAEEncode", "pos": [450, 400],
+      "inputs": [{"name": "pixels", "type": "IMAGE", "link": 6}, {"name": "vae", "type": "VAE", "link": 7}],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [8], "slot_index": 0}]
+    },
+    {
+      "id": 5, "type": "CLIPTextEncode", "pos": [800, 100],
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 4}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [9], "slot_index": 0}],
+      "widgets_values": ["amazing masterpiece, triggersword, ultra quality, detailed textures"]
+    },
+    {
+      "id": 6, "type": "CLIPTextEncode", "pos": [800, 250],
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 5}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [10], "slot_index": 0}],
+      "widgets_values": ["bad quality, blurry, text, watermark"]
+    },
+    {
+      "id": 7, "type": "KSampler", "pos": [1200, 100],
+      "inputs": [
+        {"name": "model", "type": "MODEL", "link": 3},
+        {"name": "positive", "type": "CONDITIONING", "link": 9},
+        {"name": "negative", "type": "CONDITIONING", "link": 10},
+        {"name": "latent_image", "type": "LATENT", "link": 8}
+      ],
+      "outputs": [{"name": "LATENT", "type": "LATENT", "links": [11], "slot_index": 0}],
+      "widgets_values": [12345, "randomize", 30, 7.0, "dpmpp_2m", "karras", 0.55]
+    },
+    {
+      "id": 8, "type": "VAEDecode", "pos": [1550, 100],
+      "inputs": [{"name": "samples", "type": "LATENT", "link": 11}, {"name": "vae", "type": "VAE", "link": 7}],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [12], "slot_index": 0}]
+    },
+    {
+      "id": 9, "type": "SaveImage", "pos": [1800, 100],
+      "inputs": [{"name": "images", "type": "IMAGE", "link": 12}],
+      "widgets_values": ["ComfyUI"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "MODEL"], [2, 1, 1, 2, 1, "CLIP"], [3, 2, 0, 7, 0, "MODEL"],
+    [4, 2, 1, 5, 0, "CLIP"], [5, 2, 1, 6, 0, "CLIP"], [6, 3, 0, 4, 0, "IMAGE"],
+    [7, 1, 2, 4, 1, "VAE"], [8, 4, 0, 7, 3, "LATENT"], [9, 5, 0, 7, 1, "CONDITIONING"],
+    [10, 6, 0, 7, 2, "CONDITIONING"], [11, 7, 0, 8, 0, "LATENT"], [12, 8, 0, 9, 0, "IMAGE"]
+  ]
+}

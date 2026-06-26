@@ -1,0 +1,56 @@
+{
+  "last_node_id": 10,
+  "nodes": [
+    {
+      "id": 1, "type": "CheckpointLoaderSimple", "pos": [50, 100],
+      "outputs": [{"name": "MODEL", "type": "MODEL", "links": [1], "slot_index": 0}, {"name": "CLIP", "type": "CLIP", "links": [2, 3], "slot_index": 1}],
+      "widgets_values": ["juggernautXL_ragnarokBy.safetensors"]
+    },
+    {
+      "id": 2, "type": "LoadImage", "pos": [50, 300],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [6], "slot_index": 0}],
+      "widgets_values": ["baja-resolucion.jpg", "image"]
+    },
+    {
+      "id": 3, "type": "UpscaleModelLoader", "pos": [50, 600],
+      "outputs": [{"name": "UPSCALE_MODEL", "type": "UPSCALE_MODEL", "links": [7], "slot_index": 0}],
+      "widgets_values": ["4x_foolhardy_Remacri.pth"]
+    },
+    {
+      "id": 4, "type": "CLIPTextEncode", "pos": [450, 100],
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 2}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [4], "slot_index": 0}],
+      "widgets_values": ["Masterpiece, best quality, ultra detailed, 8k resolution, cinematic lighting"]
+    },
+    {
+      "id": 5, "type": "CLIPTextEncode", "pos": [450, 250],
+      "inputs": [{"name": "clip", "type": "CLIP", "link": 3}],
+      "outputs": [{"name": "CONDITIONING", "type": "CONDITIONING", "links": [5], "slot_index": 0}],
+      "widgets_values": ["blur, noise, artifact, worst quality, text, watermark"]
+    },
+    {
+      "id": 6, "type": "UltimateSDUpscale", "pos": [900, 100],
+      "inputs": [
+        {"name": "image", "type": "IMAGE", "link": 6},
+        {"name": "model", "type": "MODEL", "link": 1},
+        {"name": "positive", "type": "CONDITIONING", "link": 4},
+        {"name": "negative", "type": "CONDITIONING", "link": 5},
+        {"name": "upscale_model", "type": "UPSCALE_MODEL", "link": 7}
+      ],
+      "outputs": [{"name": "IMAGE", "type": "IMAGE", "links": [8], "slot_index": 0}],
+      "widgets_values": [
+        1024, 12345, "randomize", 20, 7.0, "dpmpp_2m", "karras", 0.35, "Linear", 1024, 1024, 8, 32, "None", 1, 64, 8, 16, 2
+      ]
+    },
+    {
+      "id": 7, "type": "SaveImage", "pos": [1300, 100],
+      "inputs": [{"name": "images", "type": "IMAGE", "link": 8}],
+      "widgets_values": ["ComfyUI"]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 6, 1, "MODEL"], [2, 1, 1, 4, 0, "CLIP"], [3, 1, 1, 5, 0, "CLIP"],
+    [4, 4, 0, 6, 2, "CONDITIONING"], [5, 5, 0, 6, 3, "CONDITIONING"], [6, 2, 0, 6, 0, "IMAGE"],
+    [7, 3, 0, 6, 4, "UPSCALE_MODEL"], [8, 6, 0, 7, 0, "IMAGE"]
+  ]
+}

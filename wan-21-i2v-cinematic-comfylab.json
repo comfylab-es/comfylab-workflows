@@ -1,0 +1,175 @@
+{
+  "last_node_id": 10,
+  "last_link_id": 12,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "WanVideoModelLoader",
+      "pos": [40, 80],
+      "size": [340, 100],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [{ "name": "MODEL", "type": "MODEL", "links": [1], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "WanVideoModelLoader" },
+      "widgets_values": ["wan2.1_i2v_1.3B_bf16.safetensors", "bf16", "auto"]
+    },
+    {
+      "id": 2,
+      "type": "LoadImage",
+      "pos": [40, 250],
+      "size": [340, 314],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        { "name": "IMAGE", "type": "IMAGE", "links": [2, 3], "slot_index": 0 },
+        { "name": "MASK", "type": "MASK", "links": null, "slot_index": 1 }
+      ],
+      "properties": { "Node name for S&R": "LoadImage" },
+      "widgets_values": ["wan_i2v_keyframe.png", "image"]
+    },
+    {
+      "id": 3,
+      "type": "WanVideoImageEncode",
+      "pos": [460, 300],
+      "size": [300, 90],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [{ "name": "image", "type": "IMAGE", "link": 2 }],
+      "outputs": [{ "name": "IMAGE_EMBEDS", "type": "IMAGE_EMBEDS", "links": [4], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "WanVideoImageEncode" },
+      "widgets_values": [832, 480]
+    },
+    {
+      "id": 4,
+      "type": "WanVideoTextEncode",
+      "pos": [460, 70],
+      "size": [520, 200],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        { "name": "POSITIVE", "type": "CONDITIONING", "links": [5], "slot_index": 0 },
+        { "name": "NEGATIVE", "type": "CONDITIONING", "links": [6], "slot_index": 1 }
+      ],
+      "properties": { "Node name for S&R": "WanVideoTextEncode" },
+      "widgets_values": [
+        "cinematic slow camera push-in, subtle parallax, natural breathing motion, soft wind moving hair and clothes, realistic lighting, stable character identity, smooth motion, high quality video",
+        "flicker, morphing face, extra limbs, warped hands, fast motion, camera shake, low quality, blurry, distorted, text, watermark"
+      ]
+    },
+    {
+      "id": 5,
+      "type": "WanVideoSampler",
+      "pos": [1050, 120],
+      "size": [360, 300],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        { "name": "model", "type": "MODEL", "link": 1 },
+        { "name": "positive", "type": "CONDITIONING", "link": 5 },
+        { "name": "negative", "type": "CONDITIONING", "link": 6 },
+        { "name": "image_embeds", "type": "IMAGE_EMBEDS", "link": 4 }
+      ],
+      "outputs": [{ "name": "LATENT", "type": "LATENT", "links": [7], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "WanVideoSampler" },
+      "widgets_values": [123456789, "fixed", 33, 30, 6.0, "uni_pc", "normal", 0.58]
+    },
+    {
+      "id": 6,
+      "type": "WanVideoVAEDecode",
+      "pos": [1480, 120],
+      "size": [260, 60],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [{ "name": "samples", "type": "LATENT", "link": 7 }],
+      "outputs": [{ "name": "IMAGE", "type": "IMAGE", "links": [8], "slot_index": 0 }],
+      "properties": { "Node name for S&R": "WanVideoVAEDecode" }
+    },
+    {
+      "id": 7,
+      "type": "VHS_VideoCombine",
+      "pos": [1810, 100],
+      "size": [420, 360],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [{ "name": "images", "type": "IMAGE", "link": 8 }],
+      "outputs": [{ "name": "Filenames", "type": "VHS_FILENAMES", "links": null, "slot_index": 0 }],
+      "properties": { "Node name for S&R": "VHS_VideoCombine" },
+      "widgets_values": {
+        "frame_rate": 24,
+        "loop_count": 0,
+        "filename_prefix": "comfylab_wan_i2v",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_output": true
+      }
+    },
+    {
+      "id": 8,
+      "type": "PreviewImage",
+      "pos": [1810, 520],
+      "size": [320, 260],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [{ "name": "images", "type": "IMAGE", "link": 3 }],
+      "outputs": [],
+      "properties": { "Node name for S&R": "PreviewImage" }
+    },
+    {
+      "id": 9,
+      "type": "Note",
+      "pos": [460, 450],
+      "size": [520, 180],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": { "text": "Preset low-VRAM: 832x480, 33 frames, modelo 1.3B, offload auto. Para vertical cambia WanVideoImageEncode a 480x832." },
+      "widgets_values": ["Preset low-VRAM: 832x480, 33 frames, modelo 1.3B, offload auto. Para vertical cambia WanVideoImageEncode a 480x832."]
+    },
+    {
+      "id": 10,
+      "type": "Note",
+      "pos": [1050, 480],
+      "size": [360, 150],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "properties": { "text": "Si el rostro se deforma, baja motion_strength a 0.40-0.50, usa menos frames y simplifica el prompt a una sola accion." },
+      "widgets_values": ["Si el rostro se deforma, baja motion_strength a 0.40-0.50, usa menos frames y simplifica el prompt a una sola accion."]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 5, 0, "MODEL"],
+    [2, 2, 0, 3, 0, "IMAGE"],
+    [3, 2, 0, 8, 0, "IMAGE"],
+    [4, 3, 0, 5, 3, "IMAGE_EMBEDS"],
+    [5, 4, 0, 5, 1, "CONDITIONING"],
+    [6, 4, 1, 5, 2, "CONDITIONING"],
+    [7, 5, 0, 6, 0, "LATENT"],
+    [8, 6, 0, 7, 0, "IMAGE"]
+  ],
+  "groups": [
+    { "title": "Modelo e imagen inicial", "bounding": [20, 40, 780, 560], "color": "#3f789e", "font_size": 24 },
+    { "title": "Prompt de movimiento", "bounding": [440, 40, 560, 250], "color": "#8a6f2a", "font_size": 24 },
+    { "title": "Video sampling", "bounding": [1030, 70, 410, 580], "color": "#2f8f5b", "font_size": 24 },
+    { "title": "Export MP4", "bounding": [1780, 60, 480, 740], "color": "#7a4f9e", "font_size": 24 }
+  ],
+  "config": {},
+  "extra": { "ds": { "scale": 0.68, "offset": [20, 40] } },
+  "version": 0.4
+}
