@@ -1,8 +1,8 @@
-# ComfyUI Workflows — comfylab.es / comfylab.ai
+# ComfyUI Workflows — comfylab.es / comfylab.dev
 
 Colección de workflows de ComfyUI para generación de imágenes y vídeos con IA, optimizados para GPUs modestas (4-8GB VRAM) y probados en RTX 3090 (24GB).
 
-Todos los workflows están documentados en **[comfylab.es](https://comfylab.es)** (español) y **[comfylab.ai](https://comfylab.ai)** (inglés) con guías paso a paso.
+Todos los workflows están documentados en **[comfylab.es](https://comfylab.es)** (español) y **[comfylab.dev](https://comfylab.dev)** (inglés) con guías paso a paso.
 
 ---
 
@@ -22,12 +22,13 @@ Todos los workflows están documentados en **[comfylab.es](https://comfylab.es)*
 | `upscaling-4k-workflow.json` | Upscaling a 4K con nitidez profesional | [Ver guía](https://comfylab.es/blog/workflows/guia-upscaling-4k-comfyui/) |
 | `wan-21-i2v-cinematic-comfylab.json` | Animación imagen a vídeo con Wan 2.1 | [Ver guía](https://comfylab.es/blog/workflows/wan-21-i2v-comfyui/) |
 | `wan-video-2-1-pro.json` | Generación de vídeo con Wan 2.1 Pro | [Ver guía](https://comfylab.es/blog/workflows/generar-videos-comfyui/) |
-| `krea2-turbo-flat-comfylab.json` | Krea 2 Turbo, grafo plano (sin bug de subgrafo) | [ES](https://comfylab.es/blog/guias-pro/krea-2-comfyui-guia-modelo-turbo/) · [EN](https://comfylab.ai/blog/guides-pro/krea-2-comfyui-guide-turbo-model/) |
-| `ltxv-2.3-t2v-comfylab.json` | Texto a vídeo + audio con LTXV-2.3 distilled | [ES](https://comfylab.es/blog/workflows/ltxv-2-3-rtx-super-resolution-comfyui-workflow-real/) · [EN](https://comfylab.ai/blog/workflows/ltxv-2-3-rtx-video-super-resolution-comfyui-workflow/) |
-| `rtx-super-resolution-upscaler-comfylab.json` | Upscaling 4K del vídeo de LTXV-2.3 con RTX Super Resolution | [ES](https://comfylab.es/blog/workflows/ltxv-2-3-rtx-super-resolution-comfyui-workflow-real/) · [EN](https://comfylab.ai/blog/workflows/ltxv-2-3-rtx-video-super-resolution-comfyui-workflow/) |
-| `scail2-character-replacement-comfylab.json` | Reemplazo de personaje en vídeo con SCAIL-2 | [ES](https://comfylab.es/blog/workflows/scail-2-character-replacement-comfyui-workflow/) · [EN](https://comfylab.ai/blog/workflows/scail-2-character-replacement-comfyui-workflow/) |
-| `wan21-i2v-boxer-replication-comfylab.json` | Imagen a vídeo con Wan 2.1, réplica de escena de boxeo | [ES](https://comfylab.es/blog/workflows/wan-2-1-i2v-vs-ltxv-2-3-comfyui-misma-escena/) · [EN](https://comfylab.ai/blog/workflows/wan-2-1-i2v-vs-ltxv-2-3-comfyui-same-scene-test/) |
-| `wan22-i2v-boxer-replication-comfylab.json` | Imagen a vídeo con Wan 2.2 MoE (HighNoise+LowNoise), misma escena | [ES](https://comfylab.es/blog/workflows/wan-2-2-i2v-vs-ltxv-2-3-comfyui-misma-escena/) · [EN](https://comfylab.ai/blog/workflows/wan-2-2-i2v-vs-ltxv-2-3-comfyui-same-scene-test/) |
+| `krea2-turbo-flat-comfylab.json` | Krea 2 Turbo, grafo plano (sin bug de subgrafo) | [ES](https://comfylab.es/blog/guias-pro/krea-2-comfyui-guia-modelo-turbo/) · [EN](https://comfylab.dev/blog/guides-pro/krea-2-comfyui-guide-turbo-model/) |
+| `ltxv-2.3-t2v-comfylab.json` | Texto a vídeo + audio con LTXV-2.3 distilled | [ES](https://comfylab.es/blog/workflows/ltxv-2-3-rtx-super-resolution-comfyui-workflow-real/) · [EN](https://comfylab.dev/blog/workflows/ltxv-2-3-rtx-video-super-resolution-comfyui-workflow/) |
+| `rtx-super-resolution-upscaler-comfylab.json` | Upscaling 4K del vídeo de LTXV-2.3 con RTX Super Resolution | [ES](https://comfylab.es/blog/workflows/ltxv-2-3-rtx-super-resolution-comfyui-workflow-real/) · [EN](https://comfylab.dev/blog/workflows/ltxv-2-3-rtx-video-super-resolution-comfyui-workflow/) |
+| `scail2-character-replacement-comfylab.json` | Reemplazo de personaje en vídeo con SCAIL-2 | [ES](https://comfylab.es/blog/workflows/scail-2-character-replacement-comfyui-workflow/) · [EN](https://comfylab.dev/blog/workflows/scail-2-character-replacement-comfyui-workflow/) |
+| `wan21-i2v-boxer-replication-comfylab.json` | Imagen a vídeo con Wan 2.1, réplica de escena de boxeo | [ES](https://comfylab.es/blog/workflows/wan-2-1-i2v-vs-ltxv-2-3-comfyui-misma-escena/) · [EN](https://comfylab.dev/blog/workflows/wan-2-1-i2v-vs-ltxv-2-3-comfyui-same-scene-test/) |
+| `wan22-i2v-boxer-replication-comfylab.json` | Imagen a vídeo con Wan 2.2 MoE (HighNoise+LowNoise), misma escena | [ES](https://comfylab.es/blog/workflows/wan-2-2-i2v-vs-ltxv-2-3-comfyui-misma-escena/) · [EN](https://comfylab.dev/blog/workflows/wan-2-2-i2v-vs-ltxv-2-3-comfyui-same-scene-test/) |
+| `ltx-director-mars-astronaut-comfylab.json` | Texto a vídeo con audio, nodo comunitario LTX Director (WhatDreamsCost) | [ES](https://comfylab.es/blog/workflows/ltx-director-comfyui-astronauta-marte/) · [EN](https://comfylab.dev/blog/workflows/ltx-director-comfyui-mars-astronaut/) |
 
 ---
 
