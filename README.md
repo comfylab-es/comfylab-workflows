@@ -30,6 +30,7 @@ Todos los workflows están documentados en **[comfylab.es](https://comfylab.es)*
 | `wan22-i2v-boxer-replication-comfylab.json` | Imagen a vídeo con Wan 2.2 MoE (HighNoise+LowNoise), misma escena | [ES](https://comfylab.es/blog/workflows/wan-2-2-i2v-vs-ltxv-2-3-comfyui-misma-escena/) · [EN](https://comfylab.dev/blog/workflows/wan-2-2-i2v-vs-ltxv-2-3-comfyui-same-scene-test/) |
 | `ltx-director-mars-astronaut-comfylab.json` | Texto a vídeo con audio, nodo comunitario LTX Director (WhatDreamsCost) | [ES](https://comfylab.es/blog/workflows/ltx-director-comfyui-astronauta-marte/) · [EN](https://comfylab.dev/blog/workflows/ltx-director-comfyui-mars-astronaut/) |
 | `ic-lora-cameraman-v2-ltx23-comfylab.json` | Transferencia de movimiento de cámara con IC-LoRA Cameraman v2 + LTX 2.3 (vídeo-a-vídeo) | [ES](https://comfylab.es/blog/workflows/transferencia-movimiento-camara-ic-lora-cameraman-ltx23/) |
+| `wan21-i2v-uni3c-controlnet-comfylab.json` | Control de cámara paramétrico (órbita, distancia, ángulo) con Uni3C ControlNet nativo + Wan 2.1 | [EN](https://comfylab.dev/blog/workflows/uni3c-controlnet-camera-control-wan-comfyui/) |
 
 ---
 
