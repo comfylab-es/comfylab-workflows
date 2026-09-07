@@ -1,0 +1,117 @@
+{
+  "article": "https://comfylab.es/blog/workflows/ltx-2-5-comfyui-camera-motion-i2v-t2v-rtx-3090/",
+  "date": "2026-09-07",
+  "environment": {
+    "gpu": "NVIDIA GeForce RTX 3090 24GB",
+    "nvidia_driver": "610.43.03",
+    "cuda": "13.0",
+    "pytorch": "2.12.1+cu130",
+    "comfyui_commit": "169fcf35a2fc163fec31338b816503ddac0d3fcf",
+    "comfyui_commit_date": "2026-08-27",
+    "comfyui_ltxvideo_commit": "15d09abb5a187a8dcaea2fc31fe51ee96e6c9d0d",
+    "comfyui_ltxvideo_commit_date": "2026-08-20",
+    "models": {
+      "transformer": "ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors",
+      "text_encoder": "gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors",
+      "vae": "ltx-2.5-video-vae-bf16.safetensors"
+    }
+  },
+  "shared_params": {
+    "resolution": "960x544",
+    "fps": 24,
+    "duration_s": 20.0,
+    "num_frames": 481,
+    "sampler": "euler_ancestral",
+    "cfg": 1.0,
+    "sigmas": "1.0, 0.99375, 0.9875, 0.98125, 0.975, 0.909375, 0.725, 0.421875, 0.0",
+    "negative_prompt": "blurry, low quality, static camera, jump cut, watermark, text, distorted",
+    "i2v_only": {
+      "strength": 0.7,
+      "img_compression": 18
+    }
+  },
+  "runs": [
+    {
+      "scene": "bullet_time",
+      "mode": "i2v",
+      "seed": 424242,
+      "keyframe": "https://images.comfylab.es/workflows/keyframes/ltx25-bullet-time-keyframe.png",
+      "prompt": "Style: cinematic. The camera orbits smoothly around a person frozen mid-air in a dynamic flying kick, captured in a slow-motion bullet-time effect. Rain droplets hang suspended in the air as the camera circles from the front to the side of the subject on a dark urban rooftop at night. Dramatic rim lighting highlights the figure as the perspective rotates around the frozen moment.",
+      "time_s": 252.6,
+      "output_file": "ltx25_trinity_test_00001_.mp4"
+    },
+    {
+      "scene": "titanic",
+      "mode": "i2v",
+      "seed": 555000,
+      "keyframe": "https://images.comfylab.es/workflows/keyframes/ltx25-titanic-keyframe.png",
+      "prompt": "Style: cinematic. The camera slowly cranes backward and upward, pulling away from the two people standing at the ship's bow with arms outstretched. Ocean spray drifts past the camera as it rises, revealing the full width of the ship's deck below and the sunset horizon ahead. Gentle wind moves their hair and clothing.",
+      "time_s": 320.1,
+      "output_file": "ltx25_test_titanic_00001_.mp4"
+    },
+    {
+      "scene": "excalibur",
+      "mode": "i2v",
+      "seed": 555001,
+      "keyframe": "https://images.comfylab.es/workflows/keyframes/ltx25-excalibur-keyframe.png",
+      "prompt": "Style: cinematic. The camera slowly circles around the kneeling knight and the seated figure on the throne, moving from a side view toward a frontal angle, torchlight flickering on the armor as the perspective rotates. Dust motes drift through the light beams.",
+      "time_s": 226.8,
+      "output_file": "ltx25_test_excalibur_00001_.mp4"
+    },
+    {
+      "scene": "western_duel",
+      "mode": "i2v",
+      "seed": 555002,
+      "keyframe": "https://images.comfylab.es/workflows/keyframes/ltx25-western-duel-keyframe.png",
+      "prompt": "Style: cinematic western. The camera slowly pushes in low and tight toward the standing figure's hand hovering near the holster, dust blowing across the dirt road, the sun flaring behind the silhouette as the camera creeps forward with tense, deliberate motion.",
+      "time_s": 210.1,
+      "output_file": "ltx25_test_western_duel_00001_.mp4"
+    },
+    {
+      "scene": "bullet_time",
+      "mode": "t2v",
+      "seed": 777000,
+      "prompt": "Style: cinematic. A generic person in dark clothing is suspended mid-air on a rainy urban rooftop at night, frozen in a dynamic flying kick pose. The camera orbits smoothly around the frozen figure in a slow-motion bullet-time effect, rain droplets hanging in the air, dramatic rim lighting, moving from a low-angle front view to the side as the perspective circles around the moment.",
+      "time_s": 217.7,
+      "output_file": "ltx25_t2v_bullet_time_00001_.mp4"
+    },
+    {
+      "scene": "titanic",
+      "mode": "t2v",
+      "seed": 777001,
+      "prompt": "Style: cinematic. Two generic people stand at the bow of a large ship at golden sunset, arms outstretched wide to the sides, facing the ocean horizon, hair and clothing moving in the wind. The camera slowly cranes backward and upward, pulling away from the couple, revealing the full deck of the ship and the sunset ahead as ocean spray drifts past.",
+      "time_s": 225.4,
+      "output_file": "ltx25_t2v_titanic_00001_.mp4"
+    },
+    {
+      "scene": "excalibur",
+      "mode": "t2v",
+      "seed": 777002,
+      "prompt": "Style: cinematic. In a torchlit medieval great hall, an armored knight kneels on one knee before a king seated on a stone throne, head bowed in an oath of loyalty. The camera slowly circles around the two figures, moving from a side view to a frontal angle, torchlight flickering across the armor and dust motes drifting through the light beams.",
+      "time_s": 210.1,
+      "output_file": "ltx25_t2v_excalibur_00001_.mp4"
+    },
+    {
+      "scene": "western_duel",
+      "mode": "t2v",
+      "seed": 777003,
+      "prompt": "Style: cinematic western. A gunslinger stands in silhouette against a dusty desert sunset in the middle of an empty dirt street, hand hovering near the holster in a tense stance. The camera slowly pushes in low and tight toward the hand near the holster, dust blowing across the road as the sun flares behind the silhouette.",
+      "time_s": 236.1,
+      "output_file": "ltx25_t2v_western_duel_00001_.mp4"
+    }
+  ],
+  "vram_log_excerpts": [
+    "Model LTXAVTEModel_ prepared for dynamic VRAM loading. 14612MB Staged.",
+    "Model LTXAV prepared for dynamic VRAM loading. 20484MB Staged.",
+    "Found quantization metadata version 1",
+    "Detected mixed precision quantization",
+    "Native ops: asym_w4a8_int8, int8_tensorwise, convrot_w4a4"
+  ],
+  "limitations": [
+    "Una sola GPU probada (RTX 3090 24GB); no se generaliza a otras tarjetas.",
+    "Solo variante distilled probada, no dev ni nvfp4.",
+    "Sin LoRA de distillation (ltx-2.5-22b-distilled-lora-450-bf16.safetensors), no descargada por espacio en disco.",
+    "Cada combinación técnica x modo se ejecutó una sola vez, sin repeticiones para medir varianza.",
+    "Verificación de calidad por muestreo visual de fotogramas, no por métrica objetiva."
+  ]
+}
